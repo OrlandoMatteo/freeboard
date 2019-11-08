@@ -7,7 +7,7 @@ class ClientREST(object):
     def __init__(self):
             pass
     def GET(self,**params):
-        return open('index.html').read()
+        return open('index.html')
     def POST(self, *uri, **params):
         config=params['json_string']
         f=open ("dashboard/dashboard.json", "w")
