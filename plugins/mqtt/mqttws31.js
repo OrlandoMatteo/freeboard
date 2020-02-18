@@ -1298,8 +1298,8 @@ Paho.MQTT = (function (global) {
 				if (sentMessage) {
 					if(sentMessage.timeOut)
 						sentMessage.timeOut.cancel();
-					// This will need to be fixed when we add multiple topic support
-          			if (wireMessage.returnCode[0] === 0x80) {
+					wireMessage.returnCode.indexOf = Array.prototype.indexOf;
+					if (wireMessage.returnCode.indexOf(0x80) !== -1) {
 						if (sentMessage.onFailure) {
 							sentMessage.onFailure(wireMessage.returnCode);
 						} 
@@ -2141,4 +2141,3 @@ Paho.MQTT = (function (global) {
 		Message: Message
 	};
 })(window);
-

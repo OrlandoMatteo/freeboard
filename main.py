@@ -1,6 +1,8 @@
 import cherrypy
 import json
 import os
+import cherrypy_cors
+cherrypy_cors.install()
 class ClientREST(object):
     """docstring for Reverser"""
     exposed=True
@@ -19,6 +21,7 @@ if __name__ == '__main__':
 	'/':{
 		'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
 		'tools.staticdir.root': os.path.abspath(os.getcwd()),	#command taken from slides
+		'cors.expose.on': True,
 		},
 	'/css':{
 		'tools.staticdir.on': True,
@@ -42,7 +45,7 @@ if __name__ == '__main__':
 		}
 	}
     cherrypy.config.update({
-        "server.socket_port": 8088,
+        "server.socket_port": 8080,
         })
     cherrypy.tree.mount(ClientREST(),'/',conf)
     cherrypy.engine.start()
